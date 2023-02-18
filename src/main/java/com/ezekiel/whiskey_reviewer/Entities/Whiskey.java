@@ -1,5 +1,6 @@
 package com.ezekiel.whiskey_reviewer.Entities;
 
+import com.ezekiel.whiskey_reviewer.DTOs.WhiskeyDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,18 @@ public class Whiskey {
     @OneToMany(mappedBy = "whiskey", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonBackReference
     private Set<Review> reviewSet = new HashSet<>();
+
+    public Whiskey(WhiskeyDTO whiskeyDTO){
+        if(whiskeyDTO.getName() != null){
+            this.name = whiskeyDTO.getName();
+        }
+        if(whiskeyDTO.getDescription() != null){
+            this.description = whiskeyDTO.getDescription();
+        }
+        if(whiskeyDTO.getPrice() != -1){
+            this.price = whiskeyDTO.getPrice();
+        }
+    }
 
     public Long getId() {
         return id;

@@ -32,6 +32,18 @@ public class User {
     @JsonBackReference
     private Set<Review> reviewSet = new HashSet<>();
 
+    public User(UserDTO userDTO){
+        if(userDTO.getUsername() != null){
+            this.username = userDTO.getUsername();
+        }
+        if(userDTO.getEmail() != null){
+            this.email = userDTO.getEmail();
+        }
+        if(userDTO.getPassword() != null){
+            this.password = userDTO.getPassword();
+        }
+    }
+
     public Long getId() {
         return id;
     }
