@@ -4,9 +4,11 @@ import com.ezekiel.whiskey_reviewer.DTOs.ReviewDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Data
 @Table(name = "reviews")
 @AllArgsConstructor
 @NoArgsConstructor
