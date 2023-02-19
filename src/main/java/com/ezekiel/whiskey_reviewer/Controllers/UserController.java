@@ -2,6 +2,7 @@ package com.ezekiel.whiskey_reviewer.Controllers;
 
 import com.ezekiel.whiskey_reviewer.DTOs.UserDTO;
 import com.ezekiel.whiskey_reviewer.Services.UserService;
+import com.ezekiel.whiskey_reviewer.Services.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +16,7 @@ import java.util.List;
 @RequestMapping("api/users")
 public class UserController {
     @Autowired
-    private UserService userService;
+    private UserServiceImpl userService;
     @Autowired
     private PasswordEncoder passwordEncoder;
     @PostMapping("/register")
