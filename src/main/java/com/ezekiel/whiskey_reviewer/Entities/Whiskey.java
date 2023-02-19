@@ -23,7 +23,7 @@ public class Whiskey {
     @Column(unique = true)
     private String name;
 
-    @Column
+    @Column(columnDefinition = "text", length = 10000)
     private String description;
 
     @Column
