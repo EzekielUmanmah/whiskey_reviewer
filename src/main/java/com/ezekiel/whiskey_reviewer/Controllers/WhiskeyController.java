@@ -15,7 +15,7 @@ import java.util.List;
 public class WhiskeyController {
     @Autowired
     private WhiskeyServiceImpl whiskeyService;
-    @PostMapping("/add")
+    @PostMapping
     public List<String> addWhiskey(@RequestBody WhiskeyDTO whiskeyDTO){
         return whiskeyService.addWhiskey(whiskeyDTO);
     }
