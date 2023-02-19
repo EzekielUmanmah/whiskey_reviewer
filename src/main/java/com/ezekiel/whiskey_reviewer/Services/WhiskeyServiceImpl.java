@@ -19,15 +19,9 @@ public class WhiskeyServiceImpl implements WhiskeyService {
     @Transactional
     public List<String> addWhiskey(WhiskeyDTO whiskeyDTO){
         List<String> response = new ArrayList<>();
-        Optional<Whiskey> whiskeyOptional = whiskeyRepository.findById(whiskeyDTO.getId());
 
-        if(whiskeyOptional.isEmpty()){
-            Whiskey whiskey = new Whiskey(whiskeyDTO);
-            whiskeyRepository.saveAndFlush(whiskey);
-            response.add("Whiskey added!");
-        } else {
-            response.add("Whiskey already added!");
-        }
+        whiskeyRepository.saveAndFlush(new Whiskey(whiskeyDTO));
+        response.add("Whiskey added!");
 
         return response;
     }
