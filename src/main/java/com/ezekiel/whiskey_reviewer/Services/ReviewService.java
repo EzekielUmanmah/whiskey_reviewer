@@ -8,13 +8,13 @@ import java.util.Optional;
 
 public interface ReviewService {
     @Transactional
-    void addReview(ReviewDTO reviewDTO, Long userId, Long whiskeyId);
+    List<String> addReview(ReviewDTO reviewDTO, Long userId, Long whiskeyId);
 
     @Transactional
-    void deleteReviewById(Long reviewId);
+    List<String> deleteReviewById(Long reviewId);
 
     @Transactional
-    void updateReviewById(ReviewDTO reviewDTO);
+    List<String> updateReviewById(ReviewDTO reviewDTO);
 
     @Transactional
     List<ReviewDTO> getAllReviewsByUserId(Long userId);

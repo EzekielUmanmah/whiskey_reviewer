@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
@@ -26,7 +27,8 @@ public class ReviewServiceImpl implements ReviewService {
     private WhiskeyRepository whiskeyRepository;
     @Override
     @Transactional
-    public void addReview(ReviewDTO reviewDTO, Long userId, Long whiskeyId){
+    public List<String> addReview(ReviewDTO reviewDTO, Long userId, Long whiskeyId){
+        List<String> response = new ArrayList<>();
         Optional<User> userOptional = userRepository.findById(userId);
         Optional<Whiskey> whiskeyOptional = whiskeyRepository.findById(whiskeyId);
         Review review = new Review(reviewDTO);
@@ -36,16 +38,22 @@ public class ReviewServiceImpl implements ReviewService {
 //        whiskeyOptional.ifPresent(whiskey -> review.setWhiskey(whiskey));
         whiskeyOptional.ifPresent(review::setWhiskey);
         reviewRepository.saveAndFlush(review);
+        response.add("Your review has been added!");
+        return response;
     }
     @Override
     @Transactional
-    public void deleteReviewById(Long reviewId){
+    public List<String> deleteReviewById(Long reviewId){
+        List<String> response = new ArrayList<>();
         Optional<Review> reviewOptional = reviewRepository.findById(reviewId);
         reviewOptional.ifPresent(review -> reviewRepository.delete(review));
+        response.add("Review deleted!");
+        return response;
     }
     @Override
     @Transactional
-    public void updateReviewById(ReviewDTO reviewDTO){
+    public List<String> updateReviewById(ReviewDTO reviewDTO){
+        List<String> response = new ArrayList<>();
         Optional<Review> reviewOptional = reviewRepository.findById(reviewDTO.getId());
 
         reviewOptional.ifPresent(review -> {
@@ -53,6 +61,8 @@ public class ReviewServiceImpl implements ReviewService {
             review.setRating(reviewDTO.getRating());
             reviewRepository.saveAndFlush(review);
         });
+        response.add("Review updated!");
+        return response;
     }
     @Override
     @Transactional
