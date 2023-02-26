@@ -64,12 +64,13 @@ export default function SignUp() {
     onSubmit: (vals, { resetForm }) => {
       if (vals.password === vals.confirmPassword) {
         signup(vals).then((res) => {
-          if (res.data[0] === 'An account with this email already exists!') {
-            alert(res.data[0]);
-          } else {
+          if (parseInt(res.data[0])) {
+            localStorage.setItem('user', JSON.stringify(res.data[0]));
             resetForm();
-            localStorage.setItem('user', JSON.stringify(res));
             navigate('/dashboard');
+          } else {
+            // render invalid msg @res.data[0]
+            alert(res.data[0]);
           }
         });
       }

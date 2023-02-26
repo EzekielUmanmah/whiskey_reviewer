@@ -34,9 +34,14 @@ export default function Login() {
       password: data.get('password'),
     };
     const x = login(loginInfo).then((res) => {
-      console.log(res);
-      localStorage.setItem('user', JSON.stringify(res));
-      navigate('/dashboard');
+      // console.log(res.data);
+      if (parseInt(res.data[0])) {
+        localStorage.setItem('user', JSON.stringify(res.data[0]));
+        navigate('/dashboard');
+      } else {
+        // render invalid msg @res.data[0]
+        alert(res.data[0]);
+      }
     });
     console.log(x);
   };
