@@ -41,11 +41,7 @@ export default function Dashboard() {
           </Button>
         </Toolbar>
       </AppBar>
-      {isReview ? (
-        <Reviews />
-      ) : (
-        <Whiskies newWhiskey={newWhiskey} setIsReview={setNewWhiskey} />
-      )}
+      {isReview ? <Reviews /> : <Whiskies />}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component='footer'>
         <Copyright />
       </Box>
