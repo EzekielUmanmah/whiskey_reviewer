@@ -55,7 +55,7 @@ export default function AddWhiskeyForm({ setAllWhiskies }) {
             onChange={(e) =>
               setNewWhiskey((prev) => ({
                 ...prev,
-                price: parseFloat(e.target.value),
+                price: e.target.value,
               }))
             }
             required
