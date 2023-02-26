@@ -65,7 +65,7 @@ export default function SignUp() {
       if (vals.password === vals.confirmPassword) {
         signup(vals).then((res) => {
           if (parseInt(res.data[0])) {
-            localStorage.setItem('user', JSON.stringify(res.data[0]));
+            localStorage.setItem('userId', JSON.stringify(res.data[0]));
             resetForm();
             navigate('/dashboard');
           } else {

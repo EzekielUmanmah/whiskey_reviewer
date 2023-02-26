@@ -29,7 +29,7 @@ export default function AddReviewModal({
 }) {
   const initialState = {
     userDTO: {
-      id: parseInt(JSON.parse(localStorage.getItem('user'))),
+      id: parseInt(JSON.parse(localStorage.getItem('userId'))),
     },
     whiskeyDTO: { id: whiskeyData ? whiskeyData.id : '' },
     rating: 2,

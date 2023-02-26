@@ -36,7 +36,7 @@ export default function Login() {
     const x = login(loginInfo).then((res) => {
       // console.log(res.data);
       if (parseInt(res.data[0])) {
-        localStorage.setItem('user', JSON.stringify(res.data[0]));
+        localStorage.setItem('userId', JSON.stringify(res.data[0]));
         navigate('/dashboard');
       } else {
         // render invalid msg @res.data[0]
