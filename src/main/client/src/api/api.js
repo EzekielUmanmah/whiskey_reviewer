@@ -8,3 +8,5 @@ export const signup = (data) =>
 
 export const getAllWhiskies = () => axios.get(`${baseURL}/api/whiskey`);
 export const addWhiskey = (data) => axios.post(`${baseURL}/api/whiskey`, data);
+
+export const addReview = (data) => axios.post(`${baseURL}/api/review`, data);
