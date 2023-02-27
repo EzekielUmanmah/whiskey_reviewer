@@ -1,80 +1,65 @@
-import * as React from 'react';
-import AppBar from '@mui/material/AppBar';
+import { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-const cards = [
-  {
-    whiskeyName: 'Laphroaig 10',
-    rating: 5,
-    comments:
-      "What a nice, full-bodied whiskey. This whiskey packs a medicinal iodine punch to one's palatte!",
-    imgSrc:
-      'https://images-svetnapojov-cdn.rshop.sk/lbq/products/9c3d8fa7877fe9ba06f8dc3dbdb2c44c.jpg',
-  },
-];
+import { deleteReviewByReviewId, getAllReviewsByUser } from '../../api/api';
+import { Rating } from '@mui/material';
+import EditReviewModal from './EditReviewModal';
 
 const theme = createTheme();
 
 export default function Reviews() {
+  const [usersReviews, setUsersReviews] = useState();
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editWhiskey, setEditWhiskey] = useState();
+
+  useEffect(() => {
+    getAllReviewsByUser(JSON.parse(localStorage.getItem('userId'))).then(
+      (res) => setUsersReviews(res.data)
+    );
+  }, []);
+
+  const handleDelete = (reviewId) => {
+    deleteReviewByReviewId(reviewId).then((res) => {
+      if (res.data[0] === 'Review deleted!') {
+        getAllReviewsByUser(JSON.parse(localStorage.getItem('userId'))).then(
+          (res) => setUsersReviews(res.data)
+        );
+      } else {
+        alert('Review could not be deleted!');
+      }
+    });
+  };
+  const handleEdit = (reviewId) => {
+    usersReviews.map(
+      (review) => review.id === reviewId && setEditWhiskey(review)
+    );
+    setShowEditModal(true);
+  };
+
+  const setReviewsAfterUpdate = (data) => setUsersReviews(data);
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
-        {/* <Box
-          sx={{
-            bgcolor: 'background.paper',
-            pt: 8,
-            pb: 6,
-          }}
-        >
-          <Container maxWidth='sm'>
-            <Typography
-              component='h1'
-              variant='h2'
-              align='center'
-              color='text.primary'
-              gutterBottom
-            >
-              Album layout
-            </Typography>
-            <Typography
-              variant='h5'
-              align='center'
-              color='text.secondary'
-              paragraph
-            >
-              Something short and leading about the collection below—its
-              contents, the creator, etc. Make it short and sweet, but not too
-              short so folks don&apos;t simply skip over it entirely.
-            </Typography>
-            <Stack
-              sx={{ pt: 4 }}
-              direction='row'
-              spacing={2}
-              justifyContent='center'
-            >
-              <Button variant='contained'>Main call to action</Button>
-              <Button variant='outlined'>Secondary action</Button>
-            </Stack>
-          </Container>
-        </Box> */}
-        <Container sx={{ py: 8 }} maxWidth='md'>
-          {/* End hero unit */}
+        <EditReviewModal
+          showEditModal={showEditModal}
+          setShowEditModal={setShowEditModal}
+          whiskeyData={editWhiskey}
+          setReviewsAfterUpdate={setReviewsAfterUpdate}
+        />
+        <Container sx={{ py: 8, minHeight: '90vh' }} maxWidth='md'>
           <Grid container spacing={4}>
-            {cards.map((card) => (
-              <Grid item key={card} xs={12} sm={6} md={4}>
+            {usersReviews?.map((review) => (
+              <Grid item key={review.id} xs={12} sm={6} md={4}>
                 <Card
                   sx={{
                     height: '100%',
@@ -84,23 +69,27 @@ export default function Reviews() {
                 >
                   <CardMedia
                     component='img'
-                    // sx={{
-                    //   // 16:9
-                    //   pt: '56.25%',
-                    // }}
-                    image={card.imgSrc}
-                    title={card.whiskeyName}
-                    alt='random'
+                    title={review.name}
+                    image={review.whiskeyDTO.imgURL}
+                    alt='whiskey review'
                   />
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant='h5' component='h2'>
-                      {card.whiskeyName}
+                      {review.whiskeyDTO.name}
                     </Typography>
-                    <Typography>{card.comments}</Typography>
+                    <Typography>{review.comments}</Typography>
+                    <Rating name='rating' value={review.rating} />
                   </CardContent>
                   <CardActions>
-                    <Button size='small'>View</Button>
-                    <Button size='small'>Edit</Button>
+                    <Button size='small' onClick={() => handleEdit(review.id)}>
+                      Edit
+                    </Button>
+                    <Button
+                      size='small'
+                      onClick={() => handleDelete(review.id)}
+                    >
+                      Delete
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>
