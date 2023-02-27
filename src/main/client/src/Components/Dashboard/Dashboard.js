@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
-import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
 import Whiskies from './Whiskies';
 import Reviews from './Reviews';
 import Copyright from '../Misc/Copyright';
 import { Button } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { ReactComponent as Tumbler } from '../../assets/tumbler.svg';
+
 const theme = createTheme();
 
 export default function Dashboard() {
@@ -25,30 +24,29 @@ export default function Dashboard() {
 
   return (
     <ThemeProvider theme={theme}>
-      <AppBar position='relative'>
+      <AppBar position='relative' sx={{ backgroundColor: '#edeff2' }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-          <CameraIcon sx={{ mr: 2 }} />
-          <Typography variant='h6' color='inherit' noWrap>
-            {isReview ? 'Your reviews!' : 'Choose a whiskey to review!'}
-          </Typography>
-          <Button
-            variant='contained'
-            sx={{ backgroundColor: 'brown' }}
-            onClick={() => setIsReview(!isReview)}
-          >
-            {isReview ? 'Go to whiskey selection!' : 'See your reviews!'}
-          </Button>
-          <Button
-            variant='contained'
-            sx={{ backgroundColor: 'brown' }}
-            onClick={handleLogout}
-          >
-            Logout
-          </Button>
+          <Tumbler />
+          <Box sx={{ display: 'flex', columnGap: '1em' }}>
+            <Button
+              variant='outlined'
+              sx={{ alignContent: 'flex-end' }}
+              onClick={() => setIsReview(!isReview)}
+            >
+              {isReview ? 'Whiskey selection!' : 'Your reviews!'}
+            </Button>
+            <Button
+              variant='outlined'
+              sx={{ alignContent: 'flex-end' }}
+              onClick={handleLogout}
+            >
+              Logout
+            </Button>
+          </Box>
         </Toolbar>
       </AppBar>
       {isReview ? (
-        <Reviews sx={{ outerHeight: '100vh', border: '1px dashed red' }} />
+        <Reviews sx={{ outerHeight: '100vh' }} />
       ) : (
         <Whiskies sx={{ height: '100vh' }} />
       )}
