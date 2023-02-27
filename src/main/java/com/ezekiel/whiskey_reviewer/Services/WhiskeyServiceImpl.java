@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WhiskeyServiceImpl implements WhiskeyService {
@@ -25,4 +24,10 @@ public class WhiskeyServiceImpl implements WhiskeyService {
 
         return response;
     }
+    @Override
+    @Transactional
+    public List<Whiskey> getAllWhiskies(){
+        return whiskeyRepository.findAll();
+    }
+//    @Transactional
 }
