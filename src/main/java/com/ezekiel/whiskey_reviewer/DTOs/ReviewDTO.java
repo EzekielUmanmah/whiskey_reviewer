@@ -15,6 +15,7 @@ public class ReviewDTO implements Serializable {
     private int rating;
     private UserDTO userDTO;
     private WhiskeyDTO whiskeyDTO;
+
     public ReviewDTO(Review review){
         if(review.getId() != null){
             this.id = review.getId();
