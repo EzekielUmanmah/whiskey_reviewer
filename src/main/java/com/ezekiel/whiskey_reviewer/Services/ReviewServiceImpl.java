@@ -27,10 +27,10 @@ public class ReviewServiceImpl implements ReviewService {
     private WhiskeyRepository whiskeyRepository;
     @Override
     @Transactional
-    public List<String> addReview(ReviewDTO reviewDTO, Long userId, Long whiskeyId){
+    public List<String> addReview(ReviewDTO reviewDTO){
         List<String> response = new ArrayList<>();
-        Optional<User> userOptional = userRepository.findById(userId);
-        Optional<Whiskey> whiskeyOptional = whiskeyRepository.findById(whiskeyId);
+        Optional<User> userOptional = userRepository.findById(reviewDTO.getUserDTO().getId());
+        Optional<Whiskey> whiskeyOptional = whiskeyRepository.findById(reviewDTO.getWhiskeyDTO().getId());
         Review review = new Review(reviewDTO);
 //        set the review's user and whiskey
 //        userOptional.ifPresent(user -> review.setUser(user));
@@ -68,9 +68,15 @@ public class ReviewServiceImpl implements ReviewService {
     @Transactional
     public List<ReviewDTO> getAllReviewsByUserId(Long userId){
         Optional<User> userOptional = userRepository.findById(userId);
+
         if(userOptional.isPresent()){
             List<Review> reviewList = reviewRepository.findAllByUserId(userId);
-            return reviewList.stream().map(review -> new ReviewDTO(review)).collect(Collectors.toList());
+            return reviewList.stream().map(review -> {
+                ReviewDTO reviewDTO = new ReviewDTO(review);
+//                add whiskey info related to review
+                reviewDTO.setWhiskeyDTO(reviewDTO.getWhiskeyDTO());
+                return reviewDTO;
+            }).collect(Collectors.toList());
         }
         return Collections.emptyList();
     }
