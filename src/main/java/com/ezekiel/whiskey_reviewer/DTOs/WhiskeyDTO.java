@@ -17,6 +17,7 @@ public class WhiskeyDTO implements Serializable {
     private String name;
     private String description;
     private double price;
+    private String imgURL;
     private Set<ReviewDTO> reviewDTOSet = new HashSet<>();
 
     public WhiskeyDTO(Whiskey whiskey){
@@ -31,6 +32,9 @@ public class WhiskeyDTO implements Serializable {
         }
         if(whiskey.getPrice() != null){
             this.price = whiskey.getPrice();
+        }
+        if(whiskey.getImgURL() != null){
+            this.imgURL = whiskey.getImgURL();
         }
     }
 }
