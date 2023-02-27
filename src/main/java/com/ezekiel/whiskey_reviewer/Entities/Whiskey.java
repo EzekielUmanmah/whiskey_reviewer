@@ -27,6 +27,9 @@ public class Whiskey {
     private String description;
 
     @Column
+    private String imgURL;
+
+    @Column
     private Double price;
 
     @OneToMany(mappedBy = "whiskey", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -42,6 +45,9 @@ public class Whiskey {
         }
         if(whiskeyDTO.getPrice() != -1){
             this.price = whiskeyDTO.getPrice();
+        }
+        if(whiskeyDTO.getImgURL() != null){
+            this.imgURL = whiskeyDTO.getImgURL();
         }
     }
 }
