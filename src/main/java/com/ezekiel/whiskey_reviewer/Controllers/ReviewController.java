@@ -14,10 +14,8 @@ public class ReviewController {
     @Autowired
     private ReviewServiceImpl reviewService;
     @PostMapping
-    public List<String> addReview(@RequestBody ReviewDTO reviewDTO,
-                                  @RequestParam Long userId,
-                                  @RequestParam Long whiskeyId){
-        return reviewService.addReview(reviewDTO, userId, whiskeyId);
+    public List<String> addReview(@RequestBody ReviewDTO reviewDTO){
+        return reviewService.addReview(reviewDTO);
     }
     @DeleteMapping("/{reviewId}")
     public List<String> deleteReviewById(@PathVariable Long reviewId){
