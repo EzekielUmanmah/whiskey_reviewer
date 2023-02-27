@@ -64,6 +64,7 @@ export default function SignUp() {
     onSubmit: (vals, { resetForm }) => {
       if (vals.password === vals.confirmPassword) {
         signup(vals).then((res) => {
+          console.log('res', res);
           if (parseInt(res.data[0])) {
             localStorage.setItem('userId', JSON.stringify(res.data[0]));
             resetForm();
@@ -73,6 +74,8 @@ export default function SignUp() {
             alert(res.data[0]);
           }
         });
+      } else {
+        alert('Passwords do not match!');
       }
     },
   });
