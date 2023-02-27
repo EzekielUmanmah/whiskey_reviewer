@@ -10,19 +10,18 @@ import Whiskies from './Whiskies';
 import Reviews from './Reviews';
 import Copyright from '../Misc/Copyright';
 import { Button } from '@mui/material';
-
+import { useNavigate } from 'react-router-dom';
 const theme = createTheme();
 
-const initialState = {
-  name: '',
-  price: null,
-  url: '',
-  description: '',
-};
-
 export default function Dashboard() {
+  const navigate = useNavigate();
+
   const [isReview, setIsReview] = useState(false);
-  const [newWhiskey, setNewWhiskey] = useState(initialState);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
   return (
     <ThemeProvider theme={theme}>
@@ -39,9 +38,20 @@ export default function Dashboard() {
           >
             {isReview ? 'Go to whiskey selection!' : 'See your reviews!'}
           </Button>
+          <Button
+            variant='contained'
+            sx={{ backgroundColor: 'brown' }}
+            onClick={handleLogout}
+          >
+            Logout
+          </Button>
         </Toolbar>
       </AppBar>
-      {isReview ? <Reviews /> : <Whiskies />}
+      {isReview ? (
+        <Reviews sx={{ outerHeight: '100vh', border: '1px dashed red' }} />
+      ) : (
+        <Whiskies sx={{ height: '100vh' }} />
+      )}
       <Box sx={{ bgcolor: 'background.paper', p: 6 }} component='footer'>
         <Copyright />
       </Box>
