@@ -25,15 +25,13 @@ export default function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
+
     const loginInfo = {
       email: data.get('email'),
       password: data.get('password'),
     };
-    const x = login(loginInfo).then((res) => {
+
+    login(loginInfo).then((res) => {
       // console.log(res.data);
       if (parseInt(res.data[0])) {
         localStorage.setItem('userId', JSON.stringify(res.data[0]));
@@ -43,7 +41,6 @@ export default function Login() {
         alert(res.data[0]);
       }
     });
-    console.log(x);
   };
 
   return (
