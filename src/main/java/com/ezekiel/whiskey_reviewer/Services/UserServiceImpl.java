@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService {
         if(userOptional.isEmpty()){
             User user = new User(userDTO);
             userRepository.saveAndFlush(user);
+            response.add(String.valueOf(user.getId()));
             response.add("New user added!");
         } else {
             response.add("An account with this email already exists!");
