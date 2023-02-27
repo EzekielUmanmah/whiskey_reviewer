@@ -27,7 +27,7 @@ export default function Whiskies() {
 
   const getAllWhiskiesAfterAddingNewWhiskey = (data) => setAllWhiskies(data);
 
-  console.log(allWhiskies);
+  // console.log(allWhiskies);
 
   const handleReview = (card) => {
     setWhiskeyData(card);
@@ -79,7 +79,7 @@ export default function Whiskies() {
           whiskeyData={whiskeyData}
           setShowReviewModal={setShowReviewModal}
         />
-        <Container sx={{ py: 8 }} maxWidth='lg'>
+        <Container sx={{ py: 8, minHeight: '90vh' }} maxWidth='lg'>
           <AddWhiskeyForm
             setAllWhiskies={getAllWhiskiesAfterAddingNewWhiskey}
           />
