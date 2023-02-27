@@ -58,6 +58,55 @@ export default function Reviews() {
         />
         <Container sx={{ py: 8, minHeight: '90vh' }} maxWidth='md'>
           <Grid container spacing={4}>
+            {usersReviews?.length < 1 && (
+              <Grid item md={5}>
+                <Card
+                  sx={{
+                    height: '100%',
+                    display: 'flex',
+                    flexDirection: 'column',
+                  }}
+                >
+                  <CardMedia
+                    component='img'
+                    title='example'
+                    image='https://potomacwines.com/image/cache/catalog/1650/Knob%20Creek%20Single%20Barrel%20Bourbon-800x1000.jpg'
+                    alt='example whiskey review'
+                  />
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
+                    <Typography gutterBottom variant='h5' component='h2'>
+                      Example Review
+                    </Typography>
+                    <Typography>
+                      Start reviewing your own whiskies now by selecting a
+                      whiskey! Your reviews will look like this example and you
+                      can even edit and delete them!
+                    </Typography>
+                    <Rating
+                      sx={{
+                        alignSelf: 'center',
+                      }}
+                      name='rating'
+                      value={4}
+                    />
+                  </CardContent>
+                  <CardActions>
+                    <Button size='small' disabled>
+                      Edit
+                    </Button>
+                    <Button size='small' disabled>
+                      Delete
+                    </Button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            )}
             {usersReviews?.map((review) => (
               <Grid item key={review.id} xs={12} sm={6} md={4}>
                 <Card
@@ -73,12 +122,22 @@ export default function Reviews() {
                     image={review.whiskeyDTO.imgURL}
                     alt='whiskey review'
                   />
-                  <CardContent sx={{ flexGrow: 1 }}>
+                  <CardContent
+                    sx={{
+                      flexGrow: 1,
+                      display: 'flex',
+                      flexDirection: 'column',
+                    }}
+                  >
                     <Typography gutterBottom variant='h5' component='h2'>
                       {review.whiskeyDTO.name}
                     </Typography>
                     <Typography>{review.comments}</Typography>
-                    <Rating name='rating' value={review.rating} />
+                    <Rating
+                      name='rating'
+                      value={review.rating}
+                      sx={{ alignSelf: 'center' }}
+                    />
                   </CardContent>
                   <CardActions>
                     <Button size='small' onClick={() => handleEdit(review.id)}>
