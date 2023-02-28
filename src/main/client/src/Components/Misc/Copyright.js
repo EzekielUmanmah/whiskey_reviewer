@@ -9,7 +9,11 @@ export default function Copyright(props) {
       align='center'
       {...props}
     >
-      <Link color='inherit' href='https://mui.com/'>
+      <Link
+        color='inherit'
+        href='https://ezekielt.netlify.app/'
+        target='_blank'
+      >
         Built with ❤️ by Ezekiel
       </Link>{' '}
       {new Date().getFullYear()}
