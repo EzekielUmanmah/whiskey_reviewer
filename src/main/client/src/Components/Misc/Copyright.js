@@ -9,7 +9,6 @@ export default function Copyright(props) {
       align='center'
       {...props}
     >
-      {'Copyright © '}
       <Link color='inherit' href='https://mui.com/'>
         Built with ❤️ by Ezekiel
       </Link>{' '}
