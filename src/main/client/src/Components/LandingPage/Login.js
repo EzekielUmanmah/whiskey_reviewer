@@ -14,7 +14,6 @@ import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 import { login } from '../../api/api';
-import Copyright from '../Misc/Copyright';
 import { useNavigate } from 'react-router-dom';
 
 const theme = createTheme();
@@ -129,7 +128,6 @@ export default function Login() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
