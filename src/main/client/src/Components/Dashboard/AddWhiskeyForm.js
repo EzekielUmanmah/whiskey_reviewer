@@ -27,11 +27,6 @@ export default function AddWhiskeyForm({ setAllWhiskies }) {
 
   return (
     <Grid container direction='column' alignItems='center'>
-      <Grid>
-        <Typography variant='h6' gutterBottom>
-          Add a new whiskey!
-        </Typography>
-      </Grid>
       <Grid container spacing={3} maxWidth='sm' sx={{ marginBottom: '4em' }}>
         <Grid item xs={12} sm={6}>
           <TextField
