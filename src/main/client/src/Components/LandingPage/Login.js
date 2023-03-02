@@ -72,11 +72,15 @@ export default function Login() {
               alignItems: 'center',
             }}
           >
+            <Typography component='h1' variant='h4'>
+              WhiskeyReviewer
+            </Typography>
+            <br />
             <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
               <LockOutlinedIcon />
             </Avatar>
             <Typography component='h1' variant='h5'>
-              Sign in
+              Sign in to get started!
             </Typography>
             <Box
               component='form'
