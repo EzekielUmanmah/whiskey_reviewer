@@ -72,25 +72,35 @@ export default function Reviews() {
                     title='example'
                     image='https://potomacwines.com/image/cache/catalog/1650/Knob%20Creek%20Single%20Barrel%20Bourbon-800x1000.jpg'
                     alt='example whiskey review'
+                    sx={{
+                      pt: '5%',
+                      objectFit: 'contain',
+                      height: '200px',
+                    }}
                   />
                   <CardContent
                     sx={{
                       flexGrow: 1,
                       display: 'flex',
                       flexDirection: 'column',
+                      objectFit: 'contain',
                     }}
                   >
                     <Typography gutterBottom variant='h5' component='h2'>
                       Example Review
                     </Typography>
-                    <Typography>
+                    <Typography sx={{ padding: '1em' }}>
                       Start reviewing your own whiskies now by selecting a
                       whiskey! Your reviews will look like this example and you
                       can even edit and delete them!
                     </Typography>
+                    <Typography sx={{ fontSize: '.75em' }}>
+                      Suggested retail price: 59.99
+                    </Typography>
                     <Rating
                       sx={{
                         alignSelf: 'center',
+                        marginTop: '1em',
                       }}
                       name='rating'
                       value={4}
@@ -121,6 +131,11 @@ export default function Reviews() {
                     title={review.name}
                     image={review.whiskeyDTO.imgURL}
                     alt='whiskey review'
+                    sx={{
+                      pt: '5%',
+                      objectFit: 'contain',
+                      height: '200px',
+                    }}
                   />
                   <CardContent
                     sx={{
@@ -132,11 +147,16 @@ export default function Reviews() {
                     <Typography gutterBottom variant='h5' component='h2'>
                       {review.whiskeyDTO.name}
                     </Typography>
-                    <Typography>{review.comments}</Typography>
+                    <Typography sx={{ padding: '1em' }}>
+                      {review.comments}
+                    </Typography>
+                    <Typography sx={{ fontSize: '.75em' }}>
+                      Suggested retail price: 59.99
+                    </Typography>
                     <Rating
                       name='rating'
                       value={review.rating}
-                      sx={{ alignSelf: 'center' }}
+                      sx={{ alignSelf: 'center', marginTop: '1em' }}
                     />
                   </CardContent>
                   <CardActions>
