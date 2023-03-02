@@ -59,7 +59,10 @@ export default function Whiskies() {
           <Typography gutterBottom variant='h5' component='h2'>
             {card.name}
           </Typography>
-          <Typography>{card.description}</Typography>
+          <Typography sx={{ padding: '1em' }}>{card.description}</Typography>
+          <Typography sx={{ fontSize: '.75em' }}>
+            Suggested retail price: {card.price}
+          </Typography>
         </CardContent>
         <CardActions>
           <Button size='small' onClick={() => handleReview(card)}>
